@@ -10,7 +10,7 @@ Discarded input sections
  .text          0x00000000        0x0 HLED_Program.o
  .data          0x00000000        0x0 HLED_Program.o
  .bss           0x00000000        0x0 HLED_Program.o
- .text.HLED_voidInitOneLed
+ .text.HLED_u8InitOneLed
                 0x00000000        0x8 HLED_Program.o
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
@@ -252,15 +252,15 @@ END GROUP
                 0x00000068                __vector_20
                 0x0000006c                . = ALIGN (0x2)
  *(.text.*)
- .text.HLED_voidInitLedString
+ .text.HLED_u8InitLedString
                 0x0000006c        0x8 HLED_Program.o
-                0x0000006c                HLED_voidInitLedString
- .text.HLED_voidLedOnOff
+                0x0000006c                HLED_u8InitLedString
+ .text.HLED_u8LedOnOff
                 0x00000074        0x6 HLED_Program.o
-                0x00000074                HLED_voidLedOnOff
- .text.HLED_voidLedStringOnOff
+                0x00000074                HLED_u8LedOnOff
+ .text.HLED_u8LedStringOnOff
                 0x0000007a        0x6 HLED_Program.o
-                0x0000007a                HLED_voidLedStringOnOff
+                0x0000007a                HLED_u8LedStringOnOff
  .text.main     0x00000080      0x26c main.o
                 0x00000080                main
  .text.MDIO_u8SetDirectionReg
@@ -403,26 +403,26 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x10c3
+.debug_info     0x00000000     0x10d3
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_info    0x000004e6      0x1ee HLED_Program.o
- .debug_info    0x000006d4      0x71c main.o
- .debug_info    0x00000df0      0x2d3 MDIO_Program.o
+ .debug_info    0x000004e6      0x1fe HLED_Program.o
+ .debug_info    0x000006e4      0x71c main.o
+ .debug_info    0x00000e00      0x2d3 MDIO_Program.o
 
-.debug_abbrev   0x00000000      0x73e
+.debug_abbrev   0x00000000      0x740
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x4a3 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_abbrev  0x000004a3       0x80 HLED_Program.o
- .debug_abbrev  0x00000523      0x150 main.o
- .debug_abbrev  0x00000673       0xcb MDIO_Program.o
+ .debug_abbrev  0x000004a3       0x82 HLED_Program.o
+ .debug_abbrev  0x00000525      0x150 main.o
+ .debug_abbrev  0x00000675       0xcb MDIO_Program.o
 
-.debug_line     0x00000000      0x877
+.debug_line     0x00000000      0x88f
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x115 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_line    0x00000115       0xae HLED_Program.o
- .debug_line    0x000001c3      0x2e2 main.o
- .debug_line    0x000004a5      0x3d2 MDIO_Program.o
+ .debug_line    0x00000115       0xc6 HLED_Program.o
+ .debug_line    0x000001db      0x2e2 main.o
+ .debug_line    0x000004bd      0x3d2 MDIO_Program.o
 
 .debug_frame    0x00000000      0x12c
  *(.debug_frame)
@@ -430,15 +430,15 @@ END GROUP
  .debug_frame   0x00000054       0x24 main.o
  .debug_frame   0x00000078       0xb4 MDIO_Program.o
 
-.debug_str      0x00000000      0x516
+.debug_str      0x00000000      0x508
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_str     0x00000196      0x24f HLED_Program.o
-                                0x276 (size before relaxing)
- .debug_str     0x000003e5       0x81 main.o
-                                0x25e (size before relaxing)
- .debug_str     0x00000466       0xb0 MDIO_Program.o
-                                0x2b0 (size before relaxing)
+ .debug_str     0x00000196      0x241 HLED_Program.o
+                                0x268 (size before relaxing)
+ .debug_str     0x000003d7       0x81 main.o
+                                0x252 (size before relaxing)
+ .debug_str     0x00000458       0xb0 MDIO_Program.o
+                                0x2aa (size before relaxing)
 
 .debug_loc      0x00000000      0xde5
  *(.debug_loc)
@@ -472,5 +472,5 @@ END GROUP
 
 .debug_macro
  *(.debug_macro)
-OUTPUT(Led_Mainpulation.elf elf32-avr)
+OUTPUT(Led_Animation.elf elf32-avr)
 LOAD linker stubs
