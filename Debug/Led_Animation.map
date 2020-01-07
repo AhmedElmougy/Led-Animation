@@ -28,10 +28,10 @@ Discarded input sections
                 0x00000000       0x2a MDIO_Program.o
  .text.MDIO_u8ReadBit
                 0x00000000       0x6a MDIO_Program.o
- .text.MDIO_u8EnPullupReg
-                0x00000000       0x3a MDIO_Program.o
- .text.MDIO_u8EnPullupBit
-                0x00000000       0x82 MDIO_Program.o
+ .text.MDIO_u8ConfigPullupReg
+                0x00000000       0x38 MDIO_Program.o
+ .text.MDIO_u8ConfigPullupBit
+                0x00000000      0x108 MDIO_Program.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
@@ -403,26 +403,26 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x10d3
+.debug_info     0x00000000     0x1103
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_info    0x000004e6      0x1fe HLED_Program.o
  .debug_info    0x000006e4      0x71c main.o
- .debug_info    0x00000e00      0x2d3 MDIO_Program.o
+ .debug_info    0x00000e00      0x303 MDIO_Program.o
 
-.debug_abbrev   0x00000000      0x740
+.debug_abbrev   0x00000000      0x74f
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x4a3 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_abbrev  0x000004a3       0x82 HLED_Program.o
  .debug_abbrev  0x00000525      0x150 main.o
- .debug_abbrev  0x00000675       0xcb MDIO_Program.o
+ .debug_abbrev  0x00000675       0xda MDIO_Program.o
 
-.debug_line     0x00000000      0x88f
+.debug_line     0x00000000      0x8ff
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x115 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_line    0x00000115       0xc6 HLED_Program.o
  .debug_line    0x000001db      0x2e2 main.o
- .debug_line    0x000004bd      0x3d2 MDIO_Program.o
+ .debug_line    0x000004bd      0x442 MDIO_Program.o
 
 .debug_frame    0x00000000      0x12c
  *(.debug_frame)
@@ -430,21 +430,21 @@ END GROUP
  .debug_frame   0x00000054       0x24 main.o
  .debug_frame   0x00000078       0xb4 MDIO_Program.o
 
-.debug_str      0x00000000      0x508
+.debug_str      0x00000000      0x53f
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.2.209/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_str     0x00000196      0x241 HLED_Program.o
                                 0x268 (size before relaxing)
  .debug_str     0x000003d7       0x81 main.o
                                 0x252 (size before relaxing)
- .debug_str     0x00000458       0xb0 MDIO_Program.o
-                                0x2aa (size before relaxing)
+ .debug_str     0x00000458       0xe7 MDIO_Program.o
+                                0x2e1 (size before relaxing)
 
-.debug_loc      0x00000000      0xde5
+.debug_loc      0x00000000      0xea2
  *(.debug_loc)
  .debug_loc     0x00000000      0x108 HLED_Program.o
  .debug_loc     0x00000108      0x5b4 main.o
- .debug_loc     0x000006bc      0x729 MDIO_Program.o
+ .debug_loc     0x000006bc      0x7e6 MDIO_Program.o
 
 .debug_macinfo
  *(.debug_macinfo)

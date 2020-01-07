@@ -13,19 +13,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   4 .debug_aranges 000000c0  00000000  00000000  00000528  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   000010d3  00000000  00000000  000005e8  2**0
+  5 .debug_info   00001103  00000000  00000000  000005e8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 00000740  00000000  00000000  000016bb  2**0
+  6 .debug_abbrev 0000074f  00000000  00000000  000016eb  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   0000088f  00000000  00000000  00001dfb  2**0
+  7 .debug_line   000008ff  00000000  00000000  00001e3a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  0000012c  00000000  00000000  0000268c  2**2
+  8 .debug_frame  0000012c  00000000  00000000  0000273c  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    00000508  00000000  00000000  000027b8  2**0
+  9 .debug_str    0000053f  00000000  00000000  00002868  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00000de5  00000000  00000000  00002cc0  2**0
+ 10 .debug_loc    00000ea2  00000000  00000000  00002da7  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 000000d8  00000000  00000000  00003aa5  2**0
+ 11 .debug_ranges 000000d8  00000000  00000000  00003c49  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -71,11 +71,12 @@ Disassembly of section .text:
  */
 u8 HLED_u8InitLedString(u8 Copy_u8Reg)
 {
-	/*initialize desired port  as output*/
+	/*initialize desired port  as output and return error value*/
 	return MDIO_u8SetDirectionReg(Copy_u8Reg,MDIO_OUTPUT);
   6c:	61 e0       	ldi	r22, 0x01	; 1
   6e:	0e 94 76 01 	call	0x2ec	; 0x2ec <MDIO_u8SetDirectionReg>
-}
+
+}/*end of HLED_u8InitLedString*/
   72:	08 95       	ret
 
 00000074 <HLED_u8LedOnOff>:
@@ -83,10 +84,11 @@ u8 HLED_u8InitLedString(u8 Copy_u8Reg)
  */
 u8 HLED_u8LedOnOff(u8 Copy_u8Reg,u8 Copy_u8Bit,u8 Copy_u8State)
 {
-	/*write led value on desired bit*/
+	/*write led value on desired bit and return error value*/
 	return MDIO_u8WriteBit(Copy_u8Reg,Copy_u8Bit,Copy_u8State);
   74:	0e 94 ae 01 	call	0x35c	; 0x35c <MDIO_u8WriteBit>
-}
+
+}/*end of HLED_u8LedOnOff*/
   78:	08 95       	ret
 
 0000007a <HLED_u8LedStringOnOff>:
@@ -94,9 +96,10 @@ u8 HLED_u8LedOnOff(u8 Copy_u8Reg,u8 Copy_u8Bit,u8 Copy_u8State)
  */
 u8 HLED_u8LedStringOnOff(u8 Copy_u8Reg,u8 Copy_u8Value)
 {
-	/*write led values on Register*/
-	return MDIO_u8WriteReg(Copy_u8Reg,Copy_u8Value);	
+	/*write led values on Register and return error value*/
+	return MDIO_u8WriteReg(Copy_u8Reg,Copy_u8Value);
   7a:	0e 94 92 01 	call	0x324	; 0x324 <MDIO_u8WriteReg>
+
   7e:	08 95       	ret
 
 00000080 <main>:
@@ -530,12 +533,12 @@ int main(void)
  2ea:	dd ce       	rjmp	.-582    	; 0xa6 <main+0x26>
 
 000002ec <MDIO_u8SetDirectionReg>:
-	{
+		/*Report Bit number out of range error*/
 		return 2;
-		/*error Bit number out of range*/
 
 	}/*end of bit number check condition*/ 
-}
+
+}/*end of MDIO_u8SetDirectionBit()*/
  2ec:	61 30       	cpi	r22, 0x01	; 1
  2ee:	09 f4       	brne	.+2      	; 0x2f2 <MDIO_u8SetDirectionReg+0x6>
  2f0:	6f ef       	ldi	r22, 0xFF	; 255
@@ -575,10 +578,11 @@ u8 MDIO_u8WriteReg(u8 Copy_u8Reg,u8 Copy_u8Value)
  324:	61 30       	cpi	r22, 0x01	; 1
  326:	09 f4       	brne	.+2      	; 0x32a <MDIO_u8WriteReg+0x6>
 	{
-		Local_u8RegValue = 0xff;     //set whole port hight
+		/*set the whle reg hight*/
+		Local_u8RegValue = 0xff;
  328:	6f ef       	ldi	r22, 0xFF	; 255
-	{
 		Local_u8RegValue = Copy_u8Value;
+
 	}/*end of value type check condition*/
 
 	/*register switch case*/
@@ -595,6 +599,7 @@ u8 MDIO_u8WriteReg(u8 Copy_u8Reg,u8 Copy_u8Value)
  33c:	51 f0       	breq	.+20     	; 0x352 <MDIO_u8WriteReg+0x2e>
  33e:	0c c0       	rjmp	.+24     	; 0x358 <MDIO_u8WriteReg+0x34>
 	{
+		/*Set PORTx register value with inputed Reg value (Local_u8RegValue)*/
 		case MDIO_PORTA : {DIO_PORTA = Local_u8RegValue; return 0;}  break;
  340:	6b bb       	out	0x1b, r22	; 27
  342:	80 e0       	ldi	r24, 0x00	; 0
@@ -613,8 +618,10 @@ u8 MDIO_u8WriteReg(u8 Copy_u8Reg,u8 Copy_u8Value)
  356:	08 95       	ret
 		default         : return 1;   /*error Undefined Port*/
  358:	81 e0       	ldi	r24, 0x01	; 1
+
 	}/*end of register switch case*/
-}
+
+}/*end of MDIO_u8WriteReg()*/
  35a:	08 95       	ret
 
 0000035c <MDIO_u8WriteBit>:
@@ -649,6 +656,7 @@ u8 MDIO_u8WriteBit(u8 Copy_u8Reg,u8 Copy_u8Bit,u8 Copy_u8Value)
  37c:	52 c0       	rjmp	.+164    	; 0x422 <__LOCK_REGION_LENGTH__+0x22>
  37e:	70 c0       	rjmp	.+224    	; 0x460 <__LOCK_REGION_LENGTH__+0x60>
 			{
+				/*set bit corresponding PORTx reg value with inputed bit value(Copy_u8Value)*/
 				case MDIO_PORTA : {L_UTILS_SET_BIT_VALUE(DIO_PORTA,Copy_u8Bit,Copy_u8Value); return 0;} break;
  380:	41 11       	cpse	r20, r1
  382:	0d c0       	rjmp	.+26     	; 0x39e <MDIO_u8WriteBit+0x42>
@@ -761,35 +769,35 @@ u8 MDIO_u8WriteBit(u8 Copy_u8Reg,u8 Copy_u8Bit,u8 Copy_u8Value)
  452:	82 bb       	out	0x12, r24	; 18
  454:	80 e0       	ldi	r24, 0x00	; 0
  456:	08 95       	ret
-			
 		}/*end of Register value check condition*/
 	}
 	else
 	{
-		return 2; /*error Bit number out of range*/
+		/*Report Bit number out of range error*/
+		return 2; 
  458:	82 e0       	ldi	r24, 0x02	; 2
  45a:	08 95       	ret
-				
 			}/*end of Register switch case*/	
 		} 
 		else
 		{
-			return 3; /*error Register value out of range*/
+			/*Report Register value out of range error*/
+			return 3; 
  45c:	83 e0       	ldi	r24, 0x03	; 3
  45e:	08 95       	ret
-			{
+				/*set bit corresponding PORTx reg value with inputed bit value(Copy_u8Value)*/
 				case MDIO_PORTA : {L_UTILS_SET_BIT_VALUE(DIO_PORTA,Copy_u8Bit,Copy_u8Value); return 0;} break;
 				case MDIO_PORTB : {L_UTILS_SET_BIT_VALUE(DIO_PORTB,Copy_u8Bit,Copy_u8Value); return 0;} break;
 				case MDIO_PORTC : {L_UTILS_SET_BIT_VALUE(DIO_PORTC,Copy_u8Bit,Copy_u8Value); return 0;} break;
 				case MDIO_PORTD : {L_UTILS_SET_BIT_VALUE(DIO_PORTD,Copy_u8Bit,Copy_u8Value); return 0;} break;
 				default         : return 1; /*error Undefined Port*/
  460:	81 e0       	ldi	r24, 0x01	; 1
-	else
-	{
-		return 2; /*error Bit number out of range*/
+		/*Report Bit number out of range error*/
+		return 2; 
 
 	}/*end of bit number check condition*/
-}
+
+}/*end of MDIO_u8WriteBit()*/
  462:	08 95       	ret
 
 00000464 <_exit>:

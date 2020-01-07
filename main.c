@@ -101,5 +101,6 @@ int main(void)
 		_delay_ms(50);
 		
 	}/*End of while loop*/
-}
+	
+}/*end of main()*/
 
